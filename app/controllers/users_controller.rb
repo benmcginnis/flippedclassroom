@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:index, :edit, :update]
+  before_filter :signed_in_user, 
+                only: [:index, :edit, :update, :destroy, :following, :followers]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
 
@@ -7,30 +8,24 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page])
   end
 
+  def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
+  end
+
   def new
-    if !signed_in?
-      @user = User.new
-    else
-      flash[:error] = "Don't be silly, you're already signed in"
-      redirect_to root_path
-    end
+    @user = User.new
   end
 
   def create
-
-    if !signed_in?
-      @user = User.new(params[:user])
-      if @user.save
-        sign_in @user
-        flash[:success] = "Welcome to the Sample App!"
-        redirect_to @user
-      else
-        render 'new'
-      end
+    @user = User.new(params[:user])
+    if @user.save
+      sign_in @user
+      flash[:success] = "Welcome to the Sample App!"
+      redirect_to @user
     else
-      redirect_to root_path
+      render 'new'
     end
-
   end
 
   def edit
@@ -46,38 +41,34 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find(params[:id])
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User destroyed."
+    redirect_to users_url
   end
 
-  def destroy
-    userToDestroy = User.find(params[:id])
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.paginate(page: params[:page])
+    render 'show_follow'
+  end
 
-    if !current_user? userToDestroy
-      userToDestroy.destroy
-      flash[:success] = "User destroyed."
-    else
-      flash[:error] = "You cannot destroy yourself!"
-    end
-
-    redirect_to users_url
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
   end
 
   private
 
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-    end
-
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      redirect_to(root_url) unless current_user?(@user)
     end
 
     def admin_user
-      redirect_to(root_path) unless current_user.admin?
+      redirect_to(root_url) unless current_user.admin?
     end
 end
