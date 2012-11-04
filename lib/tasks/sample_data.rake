@@ -8,6 +8,9 @@ namespace :db do
 end
 
 def make_users
+
+  puts 'making users'
+
   admin = User.create!(name: "Ben McGinnis",
                email: "mcginnisb@gmail.com",
                password: "secret100",
@@ -26,6 +29,9 @@ def make_users
 end
 
 def make_microposts
+
+  puts 'posts'
+
   users = User.all(limit: 6)
   50.times do
     content = Faker::Lorem.sentence(5)
@@ -34,6 +40,9 @@ def make_microposts
 end
 
 def make_relationships
+
+  puts "making relationships"
+
   users = User.all
   user  = users.first
   followed_users = users[2..50]
