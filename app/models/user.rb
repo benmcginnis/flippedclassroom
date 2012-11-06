@@ -31,9 +31,10 @@ class User < ActiveRecord::Base
 
   validates :section, presence: true;
     
-  validates :section, presence: true, :inclusion => { :in => [1, 2, 3] }, :unless => :admin
-  validates :section, presence: true, :numericality => { :equal_to => 0 }, :if => :admin
-  #  :message => "%{value} is not a valid section" }
+  validates :section, presence: true, :inclusion => { :in => [1, 2, 3] , 
+    :message => "%{value} is not a valid section" }, :unless => :admin
+  validates :section, presence: true, :numericality => { :equal_to => 0, 
+    :message => "%{value} is not a valid section for admins" }, :if => :admin
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
