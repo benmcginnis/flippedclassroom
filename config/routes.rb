@@ -1,4 +1,6 @@
 Flippedclassroom::Application.routes.draw do
+  get "lessons/new"
+
   resources :users do
     member do
       get :following, :followers
