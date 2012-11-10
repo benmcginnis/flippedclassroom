@@ -1,10 +1,27 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean          default(FALSE)
+#  section         :integer
+#
+
 require 'spec_helper'
 
 describe User do
 
   before do
     @user = User.new(name: "Example User", email: "user@example.com", 
-                     password: "foobar", password_confirmation: "foobar")
+                     password: "foobar", password_confirmation: "foobar", section: 3)
+
+    @user.section = 1
   end
 
   subject { @user }
@@ -27,8 +44,25 @@ describe User do
   it { should respond_to(:follow!) }
   it { should respond_to(:unfollow!) }
 
+  it { should respond_to(:section) }
+
   it { should be_valid }
   it { should_not be_admin }
+
+  describe "when section is not present for non-admins" do
+    before { @user.section = nil }
+    it { should_not be_valid }
+  end
+
+  describe "when section is not 1, 2 or 3" do
+    before { @user.section = -5 }
+    it { should_not be_valid }
+  end
+
+  describe "when section is valid" do 
+    before { @user.section = [1, 2, 3].sample }
+    it { should be_valid }
+  end
 
   describe "accessible attributes" do
     it "should not allow access to admin" do
@@ -45,6 +79,25 @@ describe User do
     end
 
     it { should be_admin }
+  end
+
+  describe "section should be zero for admins" do 
+    before do 
+      @user.save!
+      @user.toggle!(:admin)
+      @user.section = [1 , 2, 3].sample 
+    end
+    it { should_not be_valid }
+
+  end
+
+  describe "if section is zero for admins" do 
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+      @user.section = 0 
+    end
+    it { should be_valid }
   end
   
   describe "when name is not present" do

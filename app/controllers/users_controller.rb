@@ -5,8 +5,29 @@ class UsersController < ApplicationController
   before_filter :admin_user,     only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
+
+    if params[:section] && params[:section] != ""
+      @users = User.where(:section => params[:section]).paginate(page: params[:page])
+
+      @currentSection = 'Section ' + params[:section].to_s
+
+      @selectedSection = params[:section]
+
+    else
+      @users = User.paginate(page: params[:page])
+
+      @currentSection = "All Sections"
+
+    end
   end
+
+  def sections
+
+    User.pluck(:section).uniq.collect { |s| ["Section " + s.to_s, s] }
+
+  end
+
+  helper_method :sections
 
   def show
     @user = User.find(params[:id])
