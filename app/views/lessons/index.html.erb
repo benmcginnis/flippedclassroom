@@ -1,1 +1,9 @@
 <% provide(:title, 'Lessons') %>
+<h1>Lessons</h1>
+ 
+ <%= link_to "New Lesson", new_lesson_path, class: "btn btn-large btn-primary" %>
+
+
+<ul class="lessons"> 
+	<%= render @lessons %>
+</ul>
