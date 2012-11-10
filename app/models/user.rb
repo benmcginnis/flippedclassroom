@@ -1,5 +1,20 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean          default(FALSE)
+#  section         :integer
+#
+
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :section
   has_secure_password
   has_many :microposts, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -13,6 +28,14 @@ class User < ActiveRecord::Base
   before_save :create_remember_token
 
   validates :name,  presence: true, length: { maximum: 50 }
+
+  validates :section, presence: true;
+    
+  validates :section, presence: true, :inclusion => { :in => [1, 2, 3] , 
+    :message => "%{value} is not a valid section" }, :unless => :admin
+  validates :section, presence: true, :numericality => { :equal_to => 0, 
+    :message => "%{value} is not a valid section for admins" }, :if => :admin
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }

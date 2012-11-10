@@ -1,5 +1,14 @@
 <% provide(:title, 'All users') %>
-<h1>All users</h1>
+<h1><%= @currentSection %>	</h1>
+
+<%= form_tag 'users' , :method => "get", :id=> 'filter_users_form' do %>
+
+<%= select_tag "section", 
+				options_for_select(sections, :selected => @selectedSection), 
+			   :prompt => "All Sections", 
+			   :id => 'filter_users' %>
+
+<% end %>
 
 <%= will_paginate %>
 
