@@ -14,3 +14,10 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+
+$(document).ready(function(){
+  $('#filter_users').change(function(){
+    $('#filter_users_form').submit();
+  })
+})
