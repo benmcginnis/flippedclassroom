@@ -25,7 +25,7 @@ describe "WebsiteContents pages" do
         it "should not create a piece of web content" do
           expect { click_button submit }.to change(WebsiteContent, :count).by(0)
         end
-        
+
         describe "error messages" do
           before { click_button submit }
 
@@ -54,7 +54,7 @@ describe "WebsiteContents pages" do
           it { should have_selector('title', text: website_content.name) }
           it { should have_selector('div.alert.alert-success', text: 'Created Content: ' + website_content.name) }
           it { should have_selector('h1', text: website_content.name) }
-          it { should have_link('visit') }
+          it { should have_selector('iframe') }
 
         end
 
