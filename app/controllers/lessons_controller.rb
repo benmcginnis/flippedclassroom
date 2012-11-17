@@ -3,7 +3,7 @@ class LessonsController < ApplicationController
   	@lesson = Lesson.new
   end
   def index
-    @currentLesson = current_user.current_lesson
+    #@currentLesson = current_user.current_lesson
   	@lessons = Lesson.all
   end
 
