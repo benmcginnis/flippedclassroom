@@ -3,6 +3,7 @@ class LessonsController < ApplicationController
   	@lesson = Lesson.new
   end
   def index
+    @currentLesson = current_user.current_lesson
   	@lessons = Lesson.all
   end
 
@@ -14,5 +15,17 @@ class LessonsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def show
+
+    @lesson = Lesson.find(params[:id])
+
+    #@user = current_user
+    #@user.current_lesson = @lesson.id
+    #@user.update_attributes(:current_lesson => @lesson.id)
+
+    #flash[:success] = "Current Lesson: #{ current_user.current_lesson }"
+
   end
 end
