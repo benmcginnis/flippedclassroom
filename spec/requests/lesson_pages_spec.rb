@@ -21,7 +21,7 @@ describe "Lesson pages" do
 
     	it "should list each lessson" do
     		Lesson.all[0..2].each do |lesson| 
-    			page.should have_selector('li', lesson.name)
+    			page.should have_selector('li', :content => lesson.name)
     		end
     	end
 
