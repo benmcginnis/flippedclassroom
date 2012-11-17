@@ -4,16 +4,16 @@ class WebsiteContentsController < ApplicationController
   end
 
   def create
-  	@wc = WebsiteContent.new(params[:websitecontent])
+  	@wc = WebsiteContent.new(params[:website_content])
   	
   	if @wc.save
-  		flash[:success] = "Created content: #{ @wc.name }"
+  		flash[:success] = "Created Content: #{ @wc.name }"
+      redirect_to @wc 
     
     else
-    	flash[:error] = "There was a problem"
+      render "new"
   	end
 
-  	render 'new'	
   
   end
   def show

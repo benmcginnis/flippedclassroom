@@ -55,11 +55,11 @@ ActiveRecord::Schema.define(:version => 20121117204016) do
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
   create_table "website_contents", :force => true do |t|
-    t.string   "link"
-    t.string   "title"
+    t.string   "contentlink"
+    t.string   "name"
     t.integer  "lesson_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end
