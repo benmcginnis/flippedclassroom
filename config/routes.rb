@@ -1,4 +1,6 @@
 Flippedclassroom::Application.routes.draw do
+  get "website_contents/new"
+
   get "lessons/new"
 
   resources :users do
@@ -11,6 +13,7 @@ Flippedclassroom::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   resources :lessons
+  resources :website_contents #, only: [:new, :create, :destroy]
       
   root to: 'static_pages#home'
 
