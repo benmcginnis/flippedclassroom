@@ -8,9 +8,7 @@ class WebsiteContentsController < ApplicationController
 
   def create
     @temp = WebsiteContent.new(params[:website_content])
-
     @lesson = Lesson.find(@temp.lesson_id)
-
   	@wc = @lesson.website_contents.build(params[:website_content])
 
   	if @wc.save
