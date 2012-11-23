@@ -1,9 +1,11 @@
 <% provide(:title, 'Lessons') %>
 <h1>Lessons</h1>
- 
- <%= link_to "New Lesson", new_lesson_path, class: "btn btn-large btn-primary" %>
 
-
-<ul class="lessons"> 
+<ul id="lessons" class="nav nav-pills pull-left"> 
 	<%= render @lessons %>
 </ul>
+
+
+<%= link_to "New Lesson", new_lesson_path, class: "btn btn-large btn-primary pull-right" %>
+
+<div class="clear">&nbsp;</div>
