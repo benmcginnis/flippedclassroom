@@ -1,15 +1,28 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
+    make_admins
     make_users
     make_microposts
     make_relationships
+    make_lessons
   end
 end
 
-def make_users
+def make_lessons
+  puts 'making lessons'
 
-  puts 'making users'
+  6.times do |n|
+    name = "Lesson #{n+1}"
+    Lesson.create(name: name)
+
+  end
+
+end
+
+def make_admins
+
+  puts 'making admins'
 
   admin = User.create!(name: "Ben McGinnis",
                email: "mcginnisb@gmail.com",
@@ -28,6 +41,12 @@ def make_users
 
   moLu.toggle!(:admin)
   moLu.section = 0
+
+end
+
+def make_users
+
+  puts 'making users'
 
   99.times do |n|
     name  = Faker::Name.name
