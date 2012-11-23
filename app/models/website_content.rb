@@ -1,6 +1,8 @@
 class WebsiteContent < ActiveRecord::Base
   attr_accessible :lesson_id, :contentlink, :name
 
+  belongs_to :lesson
+
   #before_save do |wc|
 
   #	unless wc.contentlink.validate(URI::regexp(%w(http https)))

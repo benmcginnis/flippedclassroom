@@ -15,9 +15,28 @@
 //= require bootstrap
 //= require_tree .
 
-
 $(document).ready(function(){
   $('#filter_users').change(function(){
     $('#filter_users_form').submit();
   })
-})
+});
+
+$(document).ready(function() {
+
+	var frame = $("#wcFrame");
+
+	if($(frame).length > 0)
+	{
+		console.log("got frame!");
+
+		$(frame).width($(window).width());
+		$(frame).height($(window).height());
+
+		$("#mainContentContainer").removeClass("container");
+	}
+	else
+	{
+		console.log("no frame!");
+	}
+
+});

@@ -1,2 +1,9 @@
 <% provide(:title, @lesson.name) %>
+
+<% unless @lesson.previous_lesson.nil? %>
+<%= link_to "<", @lesson.previous_lesson, :class => "btn pull-left" %>
+<% end %>
+<% unless @lesson.next_lesson.nil? %>
+<%= link_to ">", @lesson.next_lesson, :class => "btn pull-right" %>
+<% end%>
 <h1><%= @lesson.name %></h3>
