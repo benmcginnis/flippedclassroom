@@ -7,3 +7,11 @@
 <%= link_to ">", @lesson.next_lesson, :class => "btn pull-right" %>
 <% end%>
 <h1><%= @lesson.name %></h3>
+
+<h3>Readings:</h3>
+<br/>
+<ul class="nav nav-tabs nav-stacked">
+	<%= render(@lesson.website_contents) %>
+</ul>
+
+<%= link_to "Add Reading", new_website_content_path(:params => {:lesson_id => @lesson.id}), class: "btn btn-large btn-primary"  %>
