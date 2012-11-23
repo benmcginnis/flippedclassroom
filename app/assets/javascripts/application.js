@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require jquery.jplayer.min
 //= require_tree .
 
 $(document).ready(function(){
@@ -27,7 +28,7 @@ $(document).ready(function() {
 
 	if($(frame).length > 0)
 	{
-		console.log("got frame!");
+		//console.log("got frame!");
 
 		$(frame).width($(window).width());
 		$(frame).height($(window).height());
@@ -36,7 +37,39 @@ $(document).ready(function() {
 	}
 	else
 	{
-		console.log("no frame!");
+		//console.log("no frame!");
 	}
 
+});
+
+
+$(document).ready(function() {
+	var fileType = $("#jquery_jplayer_1").attr("filetype");
+    var filename =  $("#jquery_jplayer_1").attr("videofile");
+
+    var mediaObject = {};
+
+    switch(fileType)
+    {
+      case "m4v":
+        mediaObject = { m4v : filename } ;
+        break;
+      default :
+        console.log("invalid media type!")
+        break;
+    }
+
+    //console.log("setting up jplayer");
+        
+    $("#jquery_jplayer_1").jPlayer({
+      ready: function () {
+        //console.log("setting media"); 
+        $(this).jPlayer("setMedia", mediaObject);
+      },
+      //solution: "flash",
+      errorAlerts : true,
+      //warningAlerts : true, 
+      swfPath: "/vendor/assets/javascripts/Jplayer.swf", 
+      supplied: fileType
+    });
 });
