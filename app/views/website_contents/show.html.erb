@@ -1,11 +1,11 @@
 <% provide(:title, @wc.name ) %>
 
 <div class="container">
-	<% unless @wc.lesson.previous_content(@wc.id).nil? %>
-		<%= link_to "<", @wc.lesson.previous_content(@wc.id), :class => "btn pull-left" %>
+	<% unless @wc.lesson.previous_content(@wc.id, "wc").nil? %>
+		<%= link_to "<", @wc.lesson.previous_content(@wc.id, "wc"), :class => "btn pull-left" %>
 	<% end %>
-	<% unless @wc.lesson.next_content(@wc.id).nil? %>
-	<%= link_to ">", @wc.lesson.next_content(@wc.id), :class => "btn pull-right" %>
+	<% unless @wc.lesson.next_content(@wc.id, "wc").nil? %>
+	<%= link_to ">", @wc.lesson.next_content(@wc.id, "wc"), :class => "btn pull-right" %>
 	<% end %>
 	<h1><%= @wc.name %></h1>
 	<div class="center"><%= link_to "back to #{@wc.lesson.name}", @wc.lesson, :class => "btn btn-small" %></div>
