@@ -7,6 +7,8 @@
 <% end %>
 <h1><%= @vc.name %></h1>
 
+<div id="videoInstructions" class="center row"><%= @vc.instructions %></div>
+<br/>
 <div class="center"><%= link_to "back to #{@vc.lesson.name}", @vc.lesson, :class => "btn btn-small" %></div>
 <br/>
 <div id="embeddedVideo"><%= raw @vc.video_embed_code %></div>

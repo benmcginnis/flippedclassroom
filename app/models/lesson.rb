@@ -1,5 +1,5 @@
 class Lesson < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :instructions
 
   has_many :website_contents, dependent: :destroy
   has_many :video_contents, dependent: :destroy

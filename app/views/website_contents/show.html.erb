@@ -8,6 +8,8 @@
 	<%= link_to ">", @wc.lesson.next_content(@wc.id, "wc"), :class => "btn pull-right" %>
 	<% end %>
 	<h1><%= @wc.name %></h1>
+	<div id="websiteInstructions" class="center row"><%= @wc.instructions %></div>
+	<br/>
 	<div class="center"><%= link_to "back to #{@wc.lesson.name}", @wc.lesson, :class => "btn btn-small" %></div>
 	<br/>
 </div>
