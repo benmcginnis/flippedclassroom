@@ -3,6 +3,7 @@ class Lesson < ActiveRecord::Base
 
   has_many :website_contents, dependent: :destroy
   has_many :video_contents, dependent: :destroy
+  has_many :download_contents, dependent: :destroy
 
   def next_lesson
   	self.class.first(:conditions => ["id > ?", id], :order => "id asc")
