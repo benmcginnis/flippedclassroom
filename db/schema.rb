@@ -11,12 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123184252) do
+ActiveRecord::Schema.define(:version => 20121124204435) do
+
+  create_table "download_contents", :force => true do |t|
+    t.string   "name"
+    t.string   "download_link"
+    t.string   "instructions"
+    t.integer  "lesson_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "lessons", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "instructions"
   end
 
   create_table "microposts", :force => true do |t|
@@ -55,19 +65,21 @@ ActiveRecord::Schema.define(:version => 20121123184252) do
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
   create_table "video_contents", :force => true do |t|
-    t.string   "video_link"
+    t.string   "video_embed_code"
     t.string   "name"
     t.integer  "lesson_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "instructions"
   end
 
   create_table "website_contents", :force => true do |t|
     t.string   "contentlink"
     t.string   "name"
     t.integer  "lesson_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "instructions"
   end
 
 end

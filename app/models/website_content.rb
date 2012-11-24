@@ -1,5 +1,5 @@
 class WebsiteContent < ActiveRecord::Base
-  attr_accessible :lesson_id, :contentlink, :name
+  attr_accessible :lesson_id, :contentlink, :name, :instructions
 
   belongs_to :lesson
 
