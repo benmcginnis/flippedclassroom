@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   before_filter :signed_in_user, 
                  only: [:index, :edit, :update, :destroy, :following, :followers, :show]
   before_filter :correct_user,   only: [:edit, :update]
-  before_filter :check_admin,     only: :destroy
+  before_filter :admin_user,     only: :destroy
+  before_filter :authorized_viewer, only: :show
 
   def index
 
@@ -95,7 +96,11 @@ class UsersController < ApplicationController
       redirect_to(root_url) unless current_user?(@user)
     end
 
-    def check_admin
-      admin_user(root_url)
+    def authorized_viewer
+      @user = User.find(params[:id])
+      
+      unless current_user?(@user) or current_user.admin?
+        redirect_to current_user, notice: "You are not authorized to view this page."
+      end
     end
 end
