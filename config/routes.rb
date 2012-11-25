@@ -25,7 +25,7 @@ Flippedclassroom::Application.routes.draw do
   resources :download_contents
   resources :update_progress, only: [:create]
       
-  root to: 'lessons#index'
+  root to: 'static_pages#home'
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
