@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, 
-                 only: [:index, :edit, :update, :destroy, :following, :followers]
+                 only: [:index, :edit, :update, :destroy, :following, :followers, :show]
   before_filter :correct_user,   only: [:edit, :update]
-  before_filter :admin_user,     only: :destroy
+  before_filter :check_admin,     only: :destroy
 
   def index
 
@@ -89,7 +89,7 @@ class UsersController < ApplicationController
       redirect_to(root_url) unless current_user?(@user)
     end
 
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
+    def check_admin
+      admin_user(root_url)
     end
 end

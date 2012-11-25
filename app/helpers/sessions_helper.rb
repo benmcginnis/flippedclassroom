@@ -26,6 +26,12 @@ module SessionsHelper
       store_location
       redirect_to signin_url, notice: "Please sign in."
     end
+  end  
+
+  def admin_user(redirect_path)
+    unless current_user.admin?
+      redirect_to redirect_path, notice: "You are not authorized for this action."
+    end
   end
 
   def sign_out

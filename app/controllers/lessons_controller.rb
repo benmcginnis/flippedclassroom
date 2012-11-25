@@ -1,4 +1,9 @@
 class LessonsController < ApplicationController
+  before_filter :signed_in_user
+
+  before_filter :check_admin, 
+              only: [:destroy, :edit, :update, :new]
+
   def new
   	@lesson = Lesson.new
   end
@@ -28,4 +33,9 @@ class LessonsController < ApplicationController
     #flash[:success] = "Current Lesson: #{ current_user.current_lesson }"
 
   end
+
+  private 
+    def check_admin
+      admin_user(lessons_path)
+    end
 end
