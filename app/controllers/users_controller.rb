@@ -40,9 +40,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to the Flipped Classroom!"
+
+      @msLucas = User.find_by_email("lucasma@pwcs.edu")
+
+      @user.follow!(@msLucas)  unless @msLucas.nil?
+
       redirect_to @user
     else
       render 'new'

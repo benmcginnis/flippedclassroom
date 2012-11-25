@@ -26,12 +26,6 @@ class LessonsController < ApplicationController
 
     @lesson = Lesson.find(params[:id])
 
-    #@user = current_user
-    #@user.current_lesson = @lesson.id
-    #@user.update_attributes(:current_lesson => @lesson.id)
-
-    #flash[:success] = "Current Lesson: #{ current_user.current_lesson }"
-
   end
 
 end
