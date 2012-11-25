@@ -1,4 +1,9 @@
 class DownloadContentsController < ApplicationController
+
+  before_filter :signed_in_user
+  before_filter :admin_user, 
+              only: [:destroy, :edit, :update, :new]
+
   def new
 
   	@lesson = Lesson.find(params[:lesson_id])
@@ -25,4 +30,5 @@ class DownloadContentsController < ApplicationController
   def show
   	@dc = DownloadContent.find(params[:id])
   end
+  
 end

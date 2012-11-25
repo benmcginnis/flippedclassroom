@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, 
-                 only: [:index, :edit, :update, :destroy, :following, :followers]
+                 only: [:index, :edit, :update, :destroy, :following, :followers, :show]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
+  before_filter :authorized_viewer, only: :show
 
   def index
 
@@ -40,9 +41,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to the Flipped Classroom!"
+
+      @msLucas = User.find_by_email("lucasma@pwcs.edu")
+
+      @user.follow!(@msLucas)  unless @msLucas.nil?
+
       redirect_to @user
     else
       render 'new'
@@ -89,7 +96,11 @@ class UsersController < ApplicationController
       redirect_to(root_url) unless current_user?(@user)
     end
 
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
+    def authorized_viewer
+      @user = User.find(params[:id])
+      
+      unless current_user?(@user) or current_user.admin?
+        redirect_to current_user, notice: "You are not authorized to view this page."
+      end
     end
 end

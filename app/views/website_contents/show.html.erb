@@ -5,7 +5,7 @@
 		<%= link_to "<", @wc.lesson.previous_content(@wc.id, "wc"), :class => "btn pull-left" %>
 	<% end %>
 	<% unless @wc.lesson.next_content(@wc.id, "wc").nil? %>
-	<%= link_to ">", @wc.lesson.next_content(@wc.id, "wc"), :class => "btn pull-right" %>
+		<%= button_to ">", update_progress_path(:content => "Finished: #{ @wc.name }", :redirect_object => url_for(@wc.lesson.next_content(@wc.id, "wc"))), :class => "btn pull-right" %>
 	<% end %>
 	<h1><%= @wc.name %></h1>
 	<div id="websiteInstructions" class="center row"><%= @wc.instructions %></div>

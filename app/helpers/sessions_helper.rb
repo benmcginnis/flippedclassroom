@@ -26,6 +26,12 @@ module SessionsHelper
       store_location
       redirect_to signin_url, notice: "Please sign in."
     end
+  end  
+
+  def admin_user
+    unless current_user.admin?
+      redirect_to root_url, notice: "You are not authorized for this action."
+    end
   end
 
   def sign_out
