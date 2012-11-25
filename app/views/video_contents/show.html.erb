@@ -3,7 +3,7 @@
 	<%= link_to "<", @vc.lesson.previous_content(@vc.id, "vc"), :class => "btn pull-left" %>
 <% end %>
 <% unless @vc.lesson.next_content(@vc.id, "vc").nil? %>
-<%= link_to ">", @vc.lesson.next_content(@vc.id, "vc"), :class => "btn pull-right" %>
+		<%= button_to ">", update_progress_path(:content => "Finished: #{ @vc.name }", :redirect_object => url_for(@vc.lesson.next_content(@vc.id, "vc"))), :class => "btn pull-right" %>
 <% end %>
 <h1><%= @vc.name %></h1>
 

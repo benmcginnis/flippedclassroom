@@ -23,10 +23,10 @@ Flippedclassroom::Application.routes.draw do
   resources :website_contents #, only: [:new, :create, :destroy]
   resources :video_contents
   resources :download_contents
+  resources :update_progress, only: [:create]
       
   root to: 'lessons#index'
 
-  match '/updateprogress', to: 'microposts#updateprogress', via: :post
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
