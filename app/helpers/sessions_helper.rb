@@ -28,9 +28,9 @@ module SessionsHelper
     end
   end  
 
-  def admin_user(redirect_path)
+  def admin_user
     unless current_user.admin?
-      redirect_to redirect_path, notice: "You are not authorized for this action."
+      redirect_to root_url, notice: "You are not authorized for this action."
     end
   end
 

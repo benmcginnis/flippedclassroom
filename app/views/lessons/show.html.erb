@@ -29,8 +29,10 @@
 	<%= render(@lesson.download_contents) %>
 </ul>
 
-<%= link_to "Add Reading", new_website_content_path(:params => {:lesson_id => @lesson.id}), class: "btn btn-large btn-primary"  %>
+<% if current_user.admin? %>
+	<%= link_to "Add Reading", new_website_content_path(:params => {:lesson_id => @lesson.id}), class: "btn btn-large btn-primary"  %>
 
-<%= link_to "Add Video", new_video_content_path(:params => {:lesson_id => @lesson.id}), class: "btn btn-large btn-primary"  %>
+	<%= link_to "Add Video", new_video_content_path(:params => {:lesson_id => @lesson.id}), class: "btn btn-large btn-primary"  %>
 
-<%= link_to "Add Download", new_download_content_path(:params => {:lesson_id => @lesson.id}), class: "btn btn-large btn-primary"  %>
+	<%= link_to "Add Download", new_download_content_path(:params => {:lesson_id => @lesson.id}), class: "btn btn-large btn-primary"  %>
+<% end %>

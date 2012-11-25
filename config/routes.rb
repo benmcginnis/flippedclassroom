@@ -24,7 +24,7 @@ Flippedclassroom::Application.routes.draw do
   resources :video_contents
   resources :download_contents
       
-  root to: 'static_pages#home'
+  root to: 'lessons#index'
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'

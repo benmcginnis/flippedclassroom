@@ -1,7 +1,8 @@
 class VideoContentsController < ApplicationController
 
   before_filter :signed_in_user
-  before_filter :check_admin, only: [:new, :create]
+  before_filter :admin_user, 
+              only: [:destroy, :edit, :update, :new]
 
   def new
 
@@ -28,9 +29,4 @@ class VideoContentsController < ApplicationController
   	@vc = VideoContent.find(params[:id])
   end
   
-  private 
-
-    def check_admin
-      admin_user(lessons_path)
-    end
 end
