@@ -1,4 +1,9 @@
 class WebsiteContentsController < ApplicationController
+
+  before_filter :signed_in_user
+  before_filter :admin_user, 
+              only: [:destroy, :edit, :update, :new]
+
   def new
 
     @lesson = Lesson.find(params[:lesson_id])
@@ -23,4 +28,5 @@ class WebsiteContentsController < ApplicationController
   def show
   	@wc = WebsiteContent.find(params[:id])
   end
+
 end

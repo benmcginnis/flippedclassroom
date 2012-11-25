@@ -5,7 +5,7 @@
 	<%= render @lessons %>
 </ul>
 
-
-<%= link_to "New Lesson", new_lesson_path, class: "btn btn-large btn-primary pull-right" %>
-
+<% if current_user.admin? %>
+	<%= link_to "New Lesson", new_lesson_path, class: "btn btn-large btn-primary pull-right" %>
+<% end %>
 <div class="clear">&nbsp;</div>
