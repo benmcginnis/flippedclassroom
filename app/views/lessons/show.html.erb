@@ -11,24 +11,28 @@
 <div id="lessonInstructions" class="center row"><%= @lesson.instructions %></div>
 <br/>
 
+<% if @lesson.video_contents.count > 0 %>
+
 <h3>Videos:</h3>
 <br/>
 <ul class="nav nav-tabs nav-stacked">
 	<%= render(@lesson.video_contents) %>
 </ul>
-
+<% end %>
+<% if @lesson.website_contents.count > 0 %>
 <h3>Readings:</h3>
 <br/>
 <ul class="nav nav-tabs nav-stacked">
 	<%= render(@lesson.website_contents) %>
 </ul>
-
+<% end %>
+<% if @lesson.download_contents.count > 0 %>
 <h3>Downloads:</h3>
 <br/>
 <ul class="nav nav-tabs nav-stacked">
 	<%= render(@lesson.download_contents) %>
 </ul>
-
+<% end %>
 <% if current_user.admin? %>
 	<%= link_to "Add Reading", new_website_content_path(:params => {:lesson_id => @lesson.id}), class: "btn btn-large btn-primary"  %>
 
