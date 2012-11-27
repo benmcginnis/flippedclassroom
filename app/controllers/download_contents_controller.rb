@@ -11,6 +11,21 @@ class DownloadContentsController < ApplicationController
 
   end
 
+  def edit
+    @dc = DownloadContent.find(params[:id])
+  end
+
+  def update
+    @dc = DownloadContent.find(params[:id])
+
+    if @dc.update_attributes(params[:download_content])
+      flash[:success] = "Updated #{ @dc.name }"
+      redirect_to @dc
+    else
+      render 'edit'
+    end
+  end
+
   def create
   	@temp = DownloadContent.new(params[:download_content])
 

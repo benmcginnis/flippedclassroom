@@ -11,6 +11,22 @@ class VideoContentsController < ApplicationController
 
   end
 
+  def edit
+    @vc = VideoContent.find(params[:id])
+  end
+
+  def update
+    @vc = VideoContent.find(params[:id])
+
+    if @vc.update_attributes(params[:video_content])
+      flash[:success] = "Updated #{ @vc.name }"
+      redirect_to @vc
+    else
+      render 'edit'
+    end
+
+  end
+
   def create
     @temp = VideoContent.new(params[:video_content])
     @lesson = Lesson.find(@temp.lesson_id)

@@ -7,7 +7,13 @@
 <% end %>
 <h1><%= @vc.name %></h1>
 
-<div id="videoInstructions" class="center row"><%= @vc.instructions %></div>
+<div id="videoInstructions" class="center row">
+	<%= @vc.instructions %>
+	<% if current_user.admin? %>
+	<br/>
+	<%= link_to 'edit video', edit_video_content_path %>
+	<% end %>
+</div>
 <br/>
 <div class="center"><%= link_to "back to #{@vc.lesson.name}", @vc.lesson, :class => "btn btn-small" %></div>
 <br/>
