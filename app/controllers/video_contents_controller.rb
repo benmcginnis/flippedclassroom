@@ -11,6 +11,16 @@ class VideoContentsController < ApplicationController
 
   end
 
+  def destroy
+    ctd = VideoContent.find(params[:id])
+    @lesson = Lesson.find(ctd.lesson_id)
+
+    ctd.destroy
+
+    flash[:success] = "Content deleted."
+    redirect_to @lesson
+  end
+
   def edit
     @vc = VideoContent.find(params[:id])
   end

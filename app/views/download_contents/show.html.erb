@@ -13,6 +13,10 @@
 	<% if current_user.admin? %>
 	<br/>
 	<%= link_to 'edit download', edit_download_content_path %>
+	<br/>
+    <%= link_to "delete", @dc, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: @dc.name %>
 	<% end %>
 </div>
 <br/>
