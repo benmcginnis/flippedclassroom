@@ -11,6 +11,22 @@ class WebsiteContentsController < ApplicationController
 
   end
 
+  def edit
+    @wc = WebsiteContent.find(params[:id])
+  end
+
+  def update
+    @wc = WebsiteContent.find(params[:id])
+
+    if @wc.update_attributes(params[:website_content])
+      flash[:success] = "Updated #{ @wc.name }"
+      redirect_to @wc
+    else
+      render 'edit'
+    end
+
+  end
+
   def create
     @temp = WebsiteContent.new(params[:website_content])
     @lesson = Lesson.find(@temp.lesson_id)
