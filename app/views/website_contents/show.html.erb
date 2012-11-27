@@ -10,8 +10,10 @@
 	<h1><%= @wc.name %></h1>
 	<div id="websiteInstructions" class="center row">
 		<%= @wc.instructions %>
+		<% if current_user.admin? %>
 		<br/>
 		<%=  link_to'edit reading', edit_website_content_path %> 
+		<% end %>
 	</div>
 	<br/>
 	<div class="center"><%= link_to "back to #{@wc.lesson.name}", @wc.lesson, :class => "btn btn-small" %></div>
