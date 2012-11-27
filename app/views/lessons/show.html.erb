@@ -13,6 +13,10 @@
 	<br/>
 	<% if current_user.admin? %>
 	<%= link_to 'edit lesson', edit_lesson_path %>
+	<br/>
+    <%= link_to "delete", @lesson, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: @lesson.name %>
 	<% end %>
 	</div>
 <br/>

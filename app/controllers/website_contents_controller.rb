@@ -11,6 +11,16 @@ class WebsiteContentsController < ApplicationController
 
   end
 
+  def destroy
+    ctd = WebsiteContent.find(params[:id])
+    @lesson = Lesson.find(ctd.lesson_id)
+
+    ctd.destroy
+
+    flash[:success] = "Content deleted."
+    redirect_to @lesson
+  end
+
   def edit
     @wc = WebsiteContent.find(params[:id])
   end

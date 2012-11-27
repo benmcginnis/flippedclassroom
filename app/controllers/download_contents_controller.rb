@@ -11,6 +11,17 @@ class DownloadContentsController < ApplicationController
 
   end
 
+  def destroy
+    ctd = DownloadContent.find(params[:id])
+    @lesson = Lesson.find(ctd.lesson_id)
+
+    ctd.destroy
+
+    flash[:success] = "Content deleted."
+    redirect_to @lesson
+
+  end
+
   def edit
     @dc = DownloadContent.find(params[:id])
   end
