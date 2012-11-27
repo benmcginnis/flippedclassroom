@@ -50,7 +50,13 @@ class UsersController < ApplicationController
 
       @user.follow!(@msLucas)  unless @msLucas.nil?
 
-      redirect_to @user
+      @msLucas.follow!(@user) unless @msLucas.nil?
+
+      @mp = @user.microposts.build(:content => "Signed up for the Flipped Classroom!")
+
+      @mp.save!
+
+      redirect_to root_url
     else
       render 'new'
     end
