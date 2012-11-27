@@ -12,6 +12,10 @@
 	<% if current_user.admin? %>
 	<br/>
 	<%= link_to 'edit video', edit_video_content_path %>
+	<br/>
+    <%= link_to "delete", @vc, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: @vc.name %>
 	<% end %>
 </div>
 <br/>

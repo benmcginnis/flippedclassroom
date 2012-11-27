@@ -7,6 +7,13 @@ class LessonsController < ApplicationController
   def new
   	@lesson = Lesson.new
   end
+
+  def destroy
+    Lesson.find(params[:id]).destroy
+    flash[:success] = "Lesson deleted."
+    redirect_to lessons_path
+  end
+
   def index
     #@currentLesson = current_user.current_lesson
   	@lessons = Lesson.all
