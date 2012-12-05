@@ -49,6 +49,10 @@ class LessonsController < ApplicationController
 
     @lesson = Lesson.find(params[:id])
 
+    mp = current_user.microposts.build(:content => "Visited: #{ @lesson.name }")
+
+    mp.save!
+
   end
 
 end
