@@ -55,6 +55,11 @@ class DownloadContentsController < ApplicationController
 
   def show
   	@dc = DownloadContent.find(params[:id])
+
+
+    mp = current_user.microposts.build(:content => "Visited: #{ @dc.name }")
+
+    mp.save!
   end
   
 end

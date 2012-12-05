@@ -53,6 +53,11 @@ class VideoContentsController < ApplicationController
   end
   def show
   	@vc = VideoContent.find(params[:id])
+
+    mp = current_user.microposts.build(:content => "Visited: #{ @vc.name }")
+
+    mp.save!
+
   end
   
 end

@@ -53,6 +53,11 @@ class WebsiteContentsController < ApplicationController
   end
   def show
   	@wc = WebsiteContent.find(params[:id])
+
+
+    mp = current_user.microposts.build(:content => "Visited: #{ @wc.name }")
+
+    mp.save!
   end
 
 end
